@@ -1,9 +1,11 @@
 <?php
 
+
 class Raffler
 {
+
     const WHEEL_ROUNDS = 3500000;
-    const WHEEL_PRINT  = 259999;
+    const WHEEL_PRINT = 259999;
     const NAMES_COUNT = 10;
     const LOOSER_WAIT_SCREEN = 3;
 
@@ -25,51 +27,7 @@ class Raffler
             $this->dismissOneCompetitor();
         }
 
-
-        echo '***********************************' . PHP_EOL;
-        echo 'And the winner is...' . PHP_EOL;
-        echo $this->competitors[0] . '!!!!';
-    }
-
-    private function printCompetitors()
-    {
-        echo 'There are ' . $this->getCompetitorsCount() . ' competitors:' . PHP_EOL;
-
-        sort($this->competitors);
-
-        foreach ($this->competitors AS $competitor) {
-            echo '- ' . $competitor . PHP_EOL;
-        }
-
-        echo 'Let\'s turn the wheel...' . PHP_EOL . PHP_EOL;
-
-    }
-
-    private function dismissOneCompetitor()
-    {
-        $looser = array_pop($this->competitors);
-        echo PHP_EOL . PHP_EOL;
-        echo '***********************************' . PHP_EOL;
-        echo '* I\'m sorry for ' . $looser . ' :( ' . PHP_EOL;
-        echo '* Please try again next time' . PHP_EOL;
-        echo '***********************************' . PHP_EOL . PHP_EOL;
-        sleep(self::LOOSER_WAIT_SCREEN);
-    }
-
-    /**
-     * @param $name
-     */
-    public function addCompetitor($name)
-    {
-        $this->competitors[] = $name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCompetitorsCount()
-    {
-        return count($this->competitors);
+        $this->printWinner();
     }
 
     private function setInitialCompetitorsCount()
@@ -80,9 +38,31 @@ class Raffler
     /**
      * @return int
      */
+    public function getCompetitorsCount()
+    {
+        return count($this->competitors);
+    }
+
+    private function printCompetitors()
+    {
+        Output::message('There are ' . $this->getCompetitorsCount() . ' competitors:');
+
+        sort($this->competitors);
+
+        foreach ($this->competitors AS $competitor) {
+            Output::message('- ' . $competitor);
+        }
+
+        Output::message('Let\'s turn the wheel...');
+
+    }
+
+    /**
+     * @return int
+     */
     private function getRounds()
     {
-        return self::WHEEL_ROUNDS * (2 - $this->getCompetitorsCount()/$this->initialCompetitorsCount);
+        return self::WHEEL_ROUNDS * (2 - $this->getCompetitorsCount() / $this->initialCompetitorsCount);
     }
 
     /**
@@ -101,5 +81,40 @@ class Raffler
         }
     }
 
+    private function dismissOneCompetitor()
+    {
+        $looser = array_pop($this->competitors);
+        $this->printDismissedCompetitor($looser);
+    }
 
+    /**
+     * @param $name
+     */
+    private function printDismissedCompetitor($name)
+    {
+        Output::message('');
+
+        Output::hr();
+        Output::message('* I\'m sorry for ' . $name . ' :( ');
+        Output::message('* Please try again next time');
+        Output::hr();
+
+        sleep(self::LOOSER_WAIT_SCREEN);
+    }
+
+    /**
+     * @param $name
+     */
+    public function addCompetitor($name)
+    {
+        $this->competitors[] = $name;
+    }
+
+    private function printWinner()
+    {
+        Output::hr();
+        Output::message('And the winner is...');
+        Output::message($this->competitors[0]);
+        Output::hr();
+    }
 }

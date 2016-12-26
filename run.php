@@ -1,6 +1,7 @@
 <?php
 
 include_once 'Raffler.php';
+include_once 'Output.php';
 
 $raffler = new Raffler();
 $raffler->addCompetitor('Enrico');

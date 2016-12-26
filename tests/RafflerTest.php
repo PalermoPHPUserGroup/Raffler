@@ -20,5 +20,4 @@ class RafflerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(2, $raffler->getCompetitorsCount());
     }
-
 }
