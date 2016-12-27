@@ -7,7 +7,7 @@ class Raffler
     const WHEEL_ROUNDS = 3500000;
     const WHEEL_PRINT = 259999;
     const NAMES_COUNT = 10;
-    const LOOSER_WAIT_SCREEN = 3;
+    const LOSER_WAIT_SCREEN = 3;
 
     private $competitors = [];
 
@@ -99,7 +99,7 @@ class Raffler
         Output::message('* Please try again next time');
         Output::hr();
 
-        sleep(self::LOOSER_WAIT_SCREEN);
+        sleep(self::LOSER_WAIT_SCREEN);
     }
 
     /**
