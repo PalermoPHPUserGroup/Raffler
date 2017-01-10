@@ -26,7 +26,7 @@ $raffler->addCompetitor('Italo');
 $raffler->addCompetitor('Lamberto');
 $raffler->addCompetitor('Lazzaro');
 $raffler->addCompetitor('Liborio');
-$raffler->addCompetitor('Lorenzo');
+$raffler->addCompetitor('Lorenza');
 $raffler->addCompetitor('Ludovico');
 $raffler->addCompetitor('Manfredi');
 $raffler->addCompetitor('Marco');
