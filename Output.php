@@ -8,23 +8,27 @@ class Output
     const HR = '**********************************';
 
     /**
-     * @param $message
+     * @param string $message
+     * @param string $color
      */
-    public static function message($message)
+    public static function message(string $message = '', string $color = 'white')
     {
         self::log($message);
-        self::display($message);
+        self::display($message, $color);
     }
 
-    public static function hr()
+    /**
+     * @param string $color
+     */
+    public static function hr(string $color = 'white')
     {
-        self::message(self::HR);
+        self::message(self::HR, $color);
     }
 
     /**
      * @param $message
      */
-    private function log($message)
+    private static function log(string $message)
     {
         date_default_timezone_set('Europe/Rome');
         $file = fopen(sprintf('logs/log_%s.log', date('Y-m-d')), 'a');
@@ -38,10 +42,13 @@ class Output
     }
 
     /**
-     * @param $message
+     * @param        $message
+     * @param string $color
      */
-    private function display($message)
+    private static function display(string $message = '', string $color = 'white')
     {
-        echo $message . PHP_EOL;
+        $colors = new Colors();
+
+        echo $colors->getColoredString($message, $color) . PHP_EOL;
     }
 }

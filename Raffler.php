@@ -1,6 +1,5 @@
 <?php
 
-
 class Raffler
 {
 
@@ -39,19 +38,21 @@ class Raffler
     /**
      * @return int
      */
-    public function getCompetitorsCount()
+    public function getCompetitorsCount() : int
     {
         return count($this->competitors);
     }
 
     private function printCompetitors()
     {
+        Output::message();
         Output::message('There are ' . $this->getCompetitorsCount() . ' competitors:');
 
         sort($this->competitors);
 
         foreach ($this->competitors AS $competitor) {
-            Output::message('- ' . $competitor);
+            Output::message('- ' . $competitor, 'light_cyan');
+            $this->wait(.15);
         }
 
         Output::message('Let\'s turn the wheel...');
@@ -61,7 +62,7 @@ class Raffler
     /**
      * @return int
      */
-    private function getRounds()
+    private function getRounds() : int
     {
         return self::WHEEL_ROUNDS * (2 - $this->getCompetitorsCount() / $this->initialCompetitorsCount);
     }
@@ -69,15 +70,19 @@ class Raffler
     /**
      * @param $j
      */
-    private function shuffleCompetitors($j)
+    private function shuffleCompetitors(int $j)
     {
         shuffle($this->competitors);
 
         if ($j % self::WHEEL_PRINT == 0) {
-            printf('- Round %\'. 7d: %s%s' . PHP_EOL,
-                $j + 1,
-                implode(', ', array_slice($this->competitors, 0, self::NAMES_COUNT)),
-                $this->getCompetitorsCount() > self::NAMES_COUNT ? ', ...' : ''
+            Output::message(
+                sprintf(
+                    '- Round %\'. 7d: %s%s',
+                    $j + 1,
+                    implode(', ', array_slice($this->competitors, 0, self::NAMES_COUNT)),
+                    $this->getCompetitorsCount() > self::NAMES_COUNT ? ', ...' : ''
+                ),
+                'gray'
             );
         }
     }
@@ -91,33 +96,42 @@ class Raffler
     /**
      * @param $name
      */
-    private function printDismissedCompetitor($name)
+    private function printDismissedCompetitor(string $name)
     {
         Output::message('');
 
-        Output::hr();
-        Output::message('* I\'m sorry for ' . $name . ' :( ');
-        Output::message('* Please try again next time');
-        Output::hr();
+        Output::hr('red');
+        Output::message('* I\'m sorry for ' . $name . ' :( ', 'light_red');
+        Output::message('* Please try again next time', 'light_red');
+        Output::hr('red');
     }
 
     /**
      * @param $name
      */
-    public function addCompetitor($name)
+    public function addCompetitor(string $name)
     {
         $this->competitors[] = $name;
     }
 
     private function printWinner()
     {
-        Output::message('* And the winner is...');
-        Output::message('* ' . $this->competitors[0]);
-        Output::hr();
+        Output::message();
+        Output::hr('green');
+        Output::message('* And the winner is...', 'green');
+        Output::message('* ' . $this->competitors[0], 'green');
+        Output::hr('green');
     }
 
-    private function wait()
+    /**
+     * @param float $ratio
+     */
+    private function wait(float $ratio = 1)
     {
-        sleep(self::LOSER_WAIT_SCREEN * (($this->getCompetitorsCount() < 4) ? 2 : 1));
+        if (($ratio <= 0) || ($ratio > 1)) {
+            throw new DomainException('Invalid ratio');
+        }
+
+        usleep(1000000 * $ratio * self::LOSER_WAIT_SCREEN * (($this->getCompetitorsCount() < 4) ? 2 : 1));
     }
 }
