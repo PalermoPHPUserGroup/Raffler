@@ -2,7 +2,6 @@
 
 class Raffler
 {
-
     const WHEEL_ROUNDS = 1500000;
     const WHEEL_PRINT = 259999;
     const NAMES_COUNT = 10;
@@ -50,7 +49,7 @@ class Raffler
 
         sort($this->competitors);
 
-        foreach ($this->competitors AS $competitor) {
+        foreach ($this->competitors as $competitor) {
             Output::message('- ' . $competitor, 'light_cyan');
             $this->wait(.15);
         }
