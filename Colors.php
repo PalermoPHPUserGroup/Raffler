@@ -3,8 +3,8 @@
 class Colors
 {
 
-    private $foreground_colors = array();
-    private $background_colors = array();
+    private $foreground_colors = [];
+    private $background_colors = [];
 
     public function __construct()
     {
