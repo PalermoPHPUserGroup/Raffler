@@ -5,3 +5,7 @@ php:
 
 install:
   - composer install
+
+after_success:
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - bash <(curl -s https://codecov.io/bash) -t 7ddb6e14-e5ae-4ce4-9955-935bf34687a8
