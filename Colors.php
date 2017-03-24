@@ -2,7 +2,6 @@
 
 class Colors
 {
-
     private $foreground_colors = [];
     private $background_colors = [];
 

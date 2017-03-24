@@ -55,7 +55,6 @@ class Raffler
         }
 
         Output::message('Let\'s turn the wheel...');
-
     }
 
     /**
