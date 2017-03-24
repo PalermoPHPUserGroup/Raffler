@@ -1,6 +1,6 @@
 <?php
 
-include_once '../Raffler.php';
+include_once 'Raffler.php';
 
 class RafflerTest extends PHPUnit_Framework_TestCase
 {
