@@ -5,6 +5,7 @@
  */
 class Colors
 {
+
     private $foreground_colors = [
         'red'          => '0;31',
         'blue'         => '0;34',
@@ -23,6 +24,7 @@ class Colors
         'light_green'  => '1;32',
         'light_purple' => '1;35',
     ];
+
     private $background_colors = [
         'black'      => '40',
         'red'        => '41',
@@ -42,8 +44,11 @@ class Colors
      *
      * @return string
      */
-    public function getColoredString($message, $foregroundColor = null, $backgroundColor = null)
-    {
+    public function getColoredString(
+        string $message,
+        string $foregroundColor = null,
+        string $backgroundColor = null
+    ): string {
         $output = '';
 
         //Check if given foreground color found

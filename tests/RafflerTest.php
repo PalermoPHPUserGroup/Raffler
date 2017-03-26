@@ -2,6 +2,9 @@
 
 include_once 'Raffler.php';
 
+/**
+ * Class RafflerTest
+ */
 class RafflerTest extends PHPUnit_Framework_TestCase
 {
     public function testCanInitRaffler()
