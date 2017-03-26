@@ -42,5 +42,4 @@ class ColorsTest extends PHPUnit_Framework_TestCase
         $colors = new Colors();
         $this->assertEquals("\033[0;32m\033[43mHello\033[0m", $colors->getColoredString('Hello', 'green', 'yellow'));
     }
-
 }
