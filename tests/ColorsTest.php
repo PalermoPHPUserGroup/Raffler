@@ -7,7 +7,6 @@ include_once 'Colors.php';
  */
 class ColorsTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @test
      */

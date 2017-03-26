@@ -7,7 +7,6 @@ include_once 'Output.php';
  */
 class OutputTest extends PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         ob_start();

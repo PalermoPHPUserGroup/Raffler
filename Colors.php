@@ -5,7 +5,6 @@
  */
 class Colors
 {
-
     private $foreground_colors = [
         'red'          => '0;31',
         'blue'         => '0;34',
@@ -35,7 +34,6 @@ class Colors
         'cyan'       => '46',
         'light_gray' => '47',
     ];
-
 
     /**
      * @param string      $message
