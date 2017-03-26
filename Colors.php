@@ -1,69 +1,64 @@
 <?php
 
+/**
+ * Class Colors
+ */
 class Colors
 {
-    private $foreground_colors = [];
-    private $background_colors = [];
+    private $foreground_colors = [
+        'red'          => '0;31',
+        'blue'         => '0;34',
+        'cyan'         => '0;36',
+        'black'        => '0;30',
+        'brown'        => '0;33',
+        'green'        => '0;32',
+        'white'        => '1;37',
+        'purple'       => '0;35',
+        'yellow'       => '1;33',
+        'dark_gray'    => '1;30',
+        'light_red'    => '1;31',
+        'light_cyan'   => '1;36',
+        'light_blue'   => '1;34',
+        'light_gray'   => '0;37',
+        'light_green'  => '1;32',
+        'light_purple' => '1;35',
+    ];
+    private $background_colors = [
+        'black'      => '40',
+        'red'        => '41',
+        'green'      => '42',
+        'yellow'     => '43',
+        'blue'       => '44',
+        'magenta'    => '45',
+        'cyan'       => '46',
+        'light_gray' => '47',
+    ];
 
-    public function __construct()
+
+    /**
+     * @param string      $message
+     * @param string|null $foregroundColor
+     * @param string|null $backgroundColor
+     *
+     * @return string
+     */
+    public function getColoredString($message, $foregroundColor = null, $backgroundColor = null)
     {
-        // Set up shell colors
-        $this->foreground_colors['black']        = '0;30';
-        $this->foreground_colors['dark_gray']    = '1;30';
-        $this->foreground_colors['blue']         = '0;34';
-        $this->foreground_colors['light_blue']   = '1;34';
-        $this->foreground_colors['green']        = '0;32';
-        $this->foreground_colors['light_green']  = '1;32';
-        $this->foreground_colors['cyan']         = '0;36';
-        $this->foreground_colors['light_cyan']   = '1;36';
-        $this->foreground_colors['red']          = '0;31';
-        $this->foreground_colors['light_red']    = '1;31';
-        $this->foreground_colors['purple']       = '0;35';
-        $this->foreground_colors['light_purple'] = '1;35';
-        $this->foreground_colors['brown']        = '0;33';
-        $this->foreground_colors['yellow']       = '1;33';
-        $this->foreground_colors['light_gray']   = '0;37';
-        $this->foreground_colors['white']        = '1;37';
+        $output = '';
 
-        $this->background_colors['black']      = '40';
-        $this->background_colors['red']        = '41';
-        $this->background_colors['green']      = '42';
-        $this->background_colors['yellow']     = '43';
-        $this->background_colors['blue']       = '44';
-        $this->background_colors['magenta']    = '45';
-        $this->background_colors['cyan']       = '46';
-        $this->background_colors['light_gray'] = '47';
-    }
-
-    // Returns colored string
-    public function getColoredString($string, $foreground_color = null, $background_color = null)
-    {
-        $colored_string = "";
-
-        // Check if given foreground color found
-        if (isset($this->foreground_colors[$foreground_color])) {
-            $colored_string .= "\033[" . $this->foreground_colors[$foreground_color] . "m";
+        //Check if given foreground color found
+        if (isset($this->foreground_colors[$foregroundColor])) {
+            $output .= "\033[" . $this->foreground_colors[$foregroundColor] . "m";
         }
-        // Check if given background color found
-        if (isset($this->background_colors[$background_color])) {
-            $colored_string .= "\033[" . $this->background_colors[$background_color] . "m";
+
+        //Check if given background color found
+        if (isset($this->background_colors[$backgroundColor])) {
+            $output .= "\033[" . $this->background_colors[$backgroundColor] . "m";
         }
 
-        // Add string and end coloring
-        $colored_string .= $string . "\033[0m";
+        //Add string and end coloring
+        $output .= $message . "\033[0m";
 
-        return $colored_string;
-    }
-
-    // Returns all foreground color names
-    public function getForegroundColors()
-    {
-        return array_keys($this->foreground_colors);
-    }
-
-    // Returns all background color names
-    public function getBackgroundColors()
-    {
-        return array_keys($this->background_colors);
+        return $output;
     }
 }
